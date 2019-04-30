@@ -4,8 +4,7 @@ from crawler.site_crawler import SiteCrawler
 
 
 def main():
-  # home_url = input('Enter the URL of the site\'s homepage (e.g. http://www.bu.edu/): ')
-  home_url = 'https://www.python.org/'
+  home_url = input('Enter the URL of the site\'s homepage (e.g. http://www.bu.edu/): ')
 
   crawler = SiteCrawler(home_url)
   crawler.crawl()
