@@ -17,8 +17,7 @@ def get_content_type(url):
 def normalize_url(url, include_scheme=True):
   parsed = urlparse(url)
   parsed = parsed._replace(fragment='')
-  parsed = parsed._replace(query='')
-  parsed = parsed._replace(path=parsed.path.strip('/'))
+  parsed = parsed._replace(path=parsed.path.rstrip('/').rstrip('\\'))
   if not include_scheme:
     parsed = parsed._replace(scheme='')
   return urlunparse(parsed)

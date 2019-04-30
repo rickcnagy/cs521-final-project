@@ -10,7 +10,7 @@ def main():
   crawler.crawl()
 
   print(crawler.sitemap)
-  crawler.sitemap.write_to_file('sitemap.csv')
+  crawler.sitemap.write_to_file('sitemap.tsv')
 
 if __name__ == '__main__':
   main()
