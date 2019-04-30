@@ -19,9 +19,10 @@ def worker(page_queue, sitemap):
 
 def _crawl_page(page, page_queue, sitemap):
   for linked_page in page.get_linked_pages_in_domain():
-    if linked_page not in sitemap:
-      page_queue.put(linked_page)
-    sitemap.increment_page_references(linked_page)
+    with sitemap.semaphore:
+      if linked_page not in sitemap:
+        page_queue.put(linked_page)
+      sitemap.increment_page_references(linked_page)
 
 
 class SiteCrawler:

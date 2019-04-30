@@ -1,5 +1,8 @@
+from threading import Semaphore
+
 class Sitemap:
   def __init__(self, home_page):
+    self.semaphore = Semaphore()
     self._page_reference_counts = {}
     self._page_reference_counts[home_page] = 0
 
