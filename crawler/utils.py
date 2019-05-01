@@ -5,11 +5,11 @@ REQUEST_TIMEOUT_SECONDS = 10
 
 
 def get_url_contents(url):
-  print(f'GET({url})')
+  print('GET( ' + url + ')')
   try:
     return get(url, timeout=REQUEST_TIMEOUT_SECONDS).text
   except exceptions.RequestException as error:
-    print(f'Error requesting {url}')
+    print('Error requesting ' + url)
     print(error)
     return
 

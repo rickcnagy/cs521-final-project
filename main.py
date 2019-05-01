@@ -13,7 +13,7 @@ def main():
   home_url = input('Enter the URL of the site\'s homepage (e.g. http://www.bu.edu/): ')
 
   if not is_full_url(home_url):
-    print(f'Invalid URL: {home_url}')
+    print('Invalid URL: ' + home_url)
     exit()
 
   crawler = SiteCrawler(home_url)
