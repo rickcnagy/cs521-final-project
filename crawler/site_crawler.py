@@ -26,6 +26,18 @@ def _crawl_page(page, page_queue, sitemap):
 
 
 class SiteCrawler:
+  """Recursively crawls all of the pages on a site.
+
+  Creates a threadpool with WORKER_THREAD_COUNT threads, then uses those workers
+  to crawl the site through a standard queue-based crawler model. If sigterm or
+  sigint is caught on the main thread, all of the workers are gracefully killed
+  and the program exits.
+
+  Attributes:
+    sitemap: A Sitemap containing all of the information found so far in the
+      crawl.
+  """
+
   def __init__(self, home_url):
     home_page = Page(home_url)
 

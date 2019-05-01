@@ -1,4 +1,4 @@
-from requests import get, head
+from requests import get, head, exceptions
 from urllib.parse import urlparse, urljoin, urlunparse
 
 REQUEST_TIMEOUT_SECONDS = 10
@@ -6,7 +6,12 @@ REQUEST_TIMEOUT_SECONDS = 10
 
 def get_url_contents(url):
   print(f'GET({url})')
-  return get(url, timeout=REQUEST_TIMEOUT_SECONDS).text
+  try:
+    return get(url, timeout=REQUEST_TIMEOUT_SECONDS).text
+  except exceptions.RequestException as error:
+    print(f'Error requesting {url}')
+    print(error)
+    return
 
 
 def get_content_type(url):
@@ -36,3 +41,15 @@ def share_domain(a, b):
 
 def is_mailto_or_tel(href):
   return href.startswith('tel:') or href.startswith('mailto:')
+
+
+def is_full_url(url):
+  parsed = urlparse(url)
+
+  if not parsed.scheme:
+    return False
+
+  if not parsed.netloc:
+    return False
+
+  return True

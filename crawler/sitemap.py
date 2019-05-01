@@ -1,6 +1,18 @@
 from threading import Semaphore
 
 class Sitemap:
+  """All of the known pages on a site and how many inbound links they have.
+
+  When crawling a site, we build a sitemap, and this sitemap represents all of
+  the pages on the site and how many inbound links they have. This allows us to
+  both know how important each page is as well as avoid visiting the same page
+  twice.
+
+  Attributes:
+    semaphore: Ensures that multiple threads don't try to modify / access the
+      sitemap simultaneously.
+  """
+
   def __init__(self, home_page):
     self.semaphore = Semaphore()
     self._page_reference_counts = {}

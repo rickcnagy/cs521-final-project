@@ -3,9 +3,17 @@ from bs4 import BeautifulSoup
 from .utils import get_url_contents, get_content_type, normalize_url, get_absolute_url, share_domain, is_mailto_or_tel
 
 class Page:
+  """A page on a crawled site at a URL.
+
+  Attributes:
+    url: The absolute, normalized URL for this page.
+    schemeless_url: The page URL without the scheme, useful for de-duping
+      similar links
+  """
+
   def __init__(self, absolute_url):
     self.url = normalize_url(absolute_url, include_scheme=True)
-    self.schemeless_url = normalize_url(absolute_url, include_scheme=False)
+    self.schemeless_url = normalize_url(self.url, include_scheme=False)
     self._content_type = None
     self._contents = None
 
